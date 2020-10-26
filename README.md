@@ -4,9 +4,9 @@
 
 This project is run with `docker` & `docker-compose`.
 
-    $ git clone https://github.com/Pushpakant/typeracer-clone.git
-    $ cd typeracer-clone
-    $ git fetch
-    $ docker-compose up
+    $   git clone https://github.com/Pushpakant/typeracer-clone.git
+    $   cd typeracer-clone
+    $   docker-compose up
+    $   start chrome localhost:8080
 
 Open localhost:8080 in browser.
