@@ -6,10 +6,10 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - '8080:80'
-    # volumes:
-    #   - /usr/app/node_modules
-    #   - ./client:/usr/app
+      - '80:80'
+    volumes:
+      - /usr/app/node_modules
+      - ./client:/usr/app
 
   # server
   api:
@@ -19,9 +19,9 @@ services:
     restart: always
     ports:
       - 3000:3000
-    # volumes:
-    #   - /usr/app/node_modules
-    #   - ./server:/usr/app
+    volumes:
+      - /usr/app/node_modules
+      - ./server:/usr/app
     depends_on:
       - mongo
 
