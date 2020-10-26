@@ -2,9 +2,17 @@ const express = require('express');
 const socketio = require('socket.io');
 const mongoose = require('mongoose');
 
+// models
+const Game = require('./models/Game');
+
+// wordgenerator
+const wordGen = require('./wordGen');
+
 const app = express();
 
 const port = process.env.PORT || 3000;
+
+console.log(wordGen);
 
 const server = app.listen(port, () => {
   console.log('Server Listening at port ', port);
@@ -20,3 +28,7 @@ mongoose.connect(
     console.log('Connected to database!');
   }
 );
+
+app.get('/', (req, res) => {
+  res.send('Hello');
+});

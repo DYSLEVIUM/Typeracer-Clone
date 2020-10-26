@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.10.10",
+    "random-words": "^1.1.1",
     "socket.io": "^2.3.0"
   }
 }
