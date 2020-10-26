@@ -1,5 +1,6 @@
 version: '3'
 services:
+  # client side app
   client:
     build:
       context: ./client
@@ -9,3 +10,33 @@ services:
     volumes:
       - /usr/app/node_modules
       - ./client:/usr/app
+
+  # server
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - /usr/app/node_modules
+      - ./server:/usr/app
+    depends_on:
+      - mongo
+
+  # database
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+
+  # !gui for mongo temp
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
