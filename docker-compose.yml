@@ -6,7 +6,7 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - '80:80'
+      - '3200:80'
     volumes:
       - /usr/app/node_modules
       - ./client:/usr/app

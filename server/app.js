@@ -29,6 +29,6 @@ mongoose.connect(
   }
 );
 
-app.get('/', (req, res) => {
-  res.send('Hello');
+io.on('connect', (socket) => {
+  socket.emit('test', 'this is from the server');
 });
