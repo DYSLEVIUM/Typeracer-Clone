@@ -8,5 +8,3 @@ This project is run with `docker` & `docker-compose`.
     $   cd typeracer-clone
     $   docker-compose up
     $   start chrome localhost:3200
-
-Open localhost:8080 in browser.
