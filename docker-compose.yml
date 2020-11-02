@@ -14,7 +14,7 @@ services:
   # server
   api:
     build:
-      context: ./server
+      context: ./api
       dockerfile: Dockerfile
     restart: always
     ports:

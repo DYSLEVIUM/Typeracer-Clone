@@ -1,0 +1,13 @@
+<div class="main-container">
+  <form #createGame (ngSubmit)="onSubmit(createGame)">
+    <label for="nickName">Enter Nickname</label>
+    <input
+      type="text"
+      name="nickName"
+      [(ngModel)]="nickName"
+      required
+      placeholder="Enter Nickname"
+    />
+    <button type="submit">Submit</button>
+  </form>
+</div>

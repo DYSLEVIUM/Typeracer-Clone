@@ -1,15 +1,35 @@
 import { Injectable } from '@angular/core';
+import { Observable, Observer } from 'rxjs';
 import * as io from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SocketConfigService {
+  constructor() {}
   socket: SocketIOClient.Socket = io('http://localhost:3000');
+  gameState: Observer<{
+    id: string;
+    isOpen: boolean;
+    players: any[];
+    words: string[];
+  }>;
 
-  constructor() {
-    this.socket.on('test', (msg) => {
-      console.log(msg);
+  createGame(nickName: string): void {
+    this.socket.emit('createGame', nickName);
+  }
+
+  updateGame(): Observable<any> {
+    this.socket.on('updateGame', (game) => {
+      this.gameState.next(game);
     });
+
+    return new Observable((game) => {
+      this.gameState = game;
+    });
+  }
+
+  removeSocket(): void {
+    this.socket.removeAllListeners();
   }
 }
