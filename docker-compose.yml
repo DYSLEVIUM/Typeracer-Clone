@@ -21,7 +21,7 @@ services:
       - 3000:3000
     volumes:
       - /usr/app/node_modules
-      - ./server:/usr/app
+      - ./api:/usr/app
     depends_on:
       - mongo
 
