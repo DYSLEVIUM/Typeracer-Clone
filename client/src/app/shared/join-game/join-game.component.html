@@ -1,1 +1,22 @@
-<p>join-game works!</p>
+<div class="main-container">
+  <form #joinGame (ngSubmit)="onSubmit(joinGame)">
+    <label for="gameID">GameID</label>
+    <input
+      type="text"
+      name="gameID"
+      [(ngModel)]="gameID"
+      required
+      placeholder="Enter GameID"
+    />
+
+    <label for="nickName">Nickname</label>
+    <input
+      type="text"
+      name="nickName"
+      [(ngModel)]="nickName"
+      required
+      placeholder="Enter Nickname"
+    />
+    <button type="submit">Submit</button>
+  </form>
+</div>

@@ -8,6 +8,7 @@ import * as io from 'socket.io-client';
 export class SocketConfigService {
   constructor() {}
   socket: SocketIOClient.Socket = io('http://localhost:3000');
+
   gameState: Observer<{
     id: string;
     isOpen: boolean;
@@ -17,6 +18,10 @@ export class SocketConfigService {
 
   createGame(nickName: string): void {
     this.socket.emit('createGame', nickName);
+  }
+
+  joinGame(gameID: string, nickName: string): void {
+    this.socket.emit('joinGame', { gameID, nickName });
   }
 
   updateGame(): Observable<any> {

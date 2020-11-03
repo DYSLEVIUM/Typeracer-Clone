@@ -9,19 +9,21 @@ services:
       - '80:80'
     volumes:
       - /usr/app/node_modules
-      - ./client:/usr/app
+      # ?not saving builds
+      # - ./client:/usr/app
 
-  # server
-  api:
+  # server side app
+  server:
     build:
-      context: ./api
+      context: ./server
       dockerfile: Dockerfile
     restart: always
     ports:
       - 3000:3000
     volumes:
       - /usr/app/node_modules
-      - ./api:/usr/app
+      # ?not saving builds
+      # - ./server:/usr/app
     depends_on:
       - mongo
 
