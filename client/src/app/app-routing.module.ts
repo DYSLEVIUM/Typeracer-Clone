@@ -23,7 +23,7 @@ const routes: Routes = [
     component: JoinGameComponent,
   },
   {
-    path: 'game/:id',
+    path: 'game/:gameID',
     component: GameComponent,
   },
 ];

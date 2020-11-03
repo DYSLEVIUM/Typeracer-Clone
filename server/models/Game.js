@@ -16,8 +16,26 @@ const GameSchema = new mongoose.Schema({
   },
   players: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Player',
+      // type: mongoose.Schema.Types.ObjectId,
+      // ref: 'Player',
+      currWordIndex: {
+        type: Number,
+        default: 0,
+      },
+      socketID: {
+        type: String,
+      },
+      isPartyLeader: {
+        type: Boolean,
+        default: false,
+      },
+      WPM: {
+        type: Number,
+        default: -1, //  -1 represents WPM hasn't been calculated
+      },
+      nickName: {
+        type: String,
+      },
     },
   ],
   startTime: {

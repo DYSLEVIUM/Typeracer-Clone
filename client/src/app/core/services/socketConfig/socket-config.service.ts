@@ -9,12 +9,14 @@ export class SocketConfigService {
   constructor() {}
   socket: SocketIOClient.Socket = io('http://localhost:3000');
 
-  gameState: Observer<{
+  gameStateObs: Observer<{
     id: string;
     isOpen: boolean;
     players: any[];
     words: string[];
   }>;
+
+  gameState;
 
   createGame(nickName: string): void {
     this.socket.emit('createGame', nickName);
@@ -26,15 +28,19 @@ export class SocketConfigService {
 
   updateGame(): Observable<any> {
     this.socket.on('updateGame', (game) => {
-      this.gameState.next(game);
+      this.gameStateObs.next(game);
     });
 
     return new Observable((game) => {
-      this.gameState = game;
+      this.gameStateObs = game;
     });
   }
 
   removeSocket(): void {
     this.socket.removeAllListeners();
+  }
+
+  getSocketID(): string {
+    return this.socket.id;
   }
 }

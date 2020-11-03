@@ -19,7 +19,7 @@ export class CreateGameComponent implements OnInit {
     this.socket.createGame(this.nickName);
 
     this.socket.updateGame().subscribe((game) => {
-      console.log(game);
+      this.socket.gameState = game;
       this.router.navigate(['game/', game._id]);
     });
   }

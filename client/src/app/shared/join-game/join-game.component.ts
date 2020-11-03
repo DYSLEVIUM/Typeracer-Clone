@@ -19,7 +19,7 @@ export class JoinGameComponent implements OnInit {
     this.socket.joinGame(this.gameID, this.nickName);
 
     this.socket.updateGame().subscribe((game) => {
-      console.log(game);
+      this.socket.gameState = game;
       this.router.navigate(['game/', game._id]);
     });
   }

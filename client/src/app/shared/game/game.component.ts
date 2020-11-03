@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SocketConfigService } from 'src/app/core/services/socketConfig/socket-config.service';
 
 @Component({
@@ -7,12 +8,26 @@ import { SocketConfigService } from 'src/app/core/services/socketConfig/socket-c
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  constructor(private socket: SocketConfigService) {}
+  player;
+
+  constructor(private socket: SocketConfigService, private router: Router) {
+    this.player = this.findPlayer(socket.gameState.players);
+
+    //  navigating player back who entered without id from route
+    if (socket.gameState.id === '' || typeof this.player === 'undefined') {
+      this.router.navigateByUrl('/');
+    }
+  }
 
   ngOnInit(): void {
     this.socket.updateGame().subscribe((game) => {
-      //  setting up the game on initial load and listening for changes
-      console.log(game);
+      this.socket.gameState = game;
     });
+  }
+
+  findPlayer(players: Array<any>) {
+    return players.find(
+      (player) => player.socketID === this.socket.getSocketID()
+    );
   }
 }
