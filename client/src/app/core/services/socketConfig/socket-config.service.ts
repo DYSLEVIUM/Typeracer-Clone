@@ -16,7 +16,13 @@ export class SocketConfigService {
     words: string[];
   }>;
 
+  timerObs: Observer<{
+    countdown: number;
+    msg: string;
+  }>;
+
   gameState;
+  timerState;
 
   createGame(nickName: string): void {
     this.socket.emit('createGame', nickName);
@@ -36,11 +42,45 @@ export class SocketConfigService {
     });
   }
 
+  timerStart(): Observable<any> {
+    this.socket.on('timer', (timerData) => {
+      this.timerObs.next(timerData);
+    });
+
+    return new Observable((timerData) => {
+      this.timerObs = timerData;
+    });
+  }
+
+  // timerEnd(): Observable<any> {
+  //   this.socket.on('done', (timerData) => {
+  //     this.timerObs.next(timerData);
+  //   });
+
+  //   return new Observable((timerData) => {
+  //     this.timerObs = timerData;
+  //   });
+  // }
+
+  timerEnd(): Observable<any> {
+    this.socket.on('done', () => {});
+
+    return new Observable(() => {});
+  }
+
   removeSocket(): void {
     this.socket.removeAllListeners();
   }
 
+  removeListener(listener): void {
+    this.socket.removeListener(listener);
+  }
+
   getSocketID(): string {
     return this.socket.id;
+  }
+
+  startTimer(gameID, playerID): void {
+    this.socket.emit('startTimer', { gameID, playerID });
   }
 }

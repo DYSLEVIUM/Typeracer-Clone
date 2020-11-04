@@ -1,3 +1,8 @@
 <div>
-  <button *ngIf="player.isPartyLeader">Start</button>
+  <button *ngIf="player.isPartyLeader && startBtnShow" (click)="startGame()">
+    Start
+  </button>
+
+  <div *ngIf="showTimer">{{ timer.countDown }}</div>
+  <div *ngIf="showTimer">{{ timer.msg }}</div>
 </div>
