@@ -16,6 +16,8 @@ import { SocketConfigService } from 'src/app/core/services/socketConfig/socket-c
 })
 export class GameComponent implements OnInit, OnDestroy {
   player;
+  players;
+  gameCode;
   startBtnShow = true;
   updateGameSubscription: Subscription;
   timerStartSubscription: Subscription;
@@ -32,6 +34,7 @@ export class GameComponent implements OnInit, OnDestroy {
   userInputDisabled = true;
 
   constructor(private socket: SocketConfigService, private router: Router) {
+    this.players = socket.gameState.players;
     this.player = this.findPlayer(socket.gameState.players);
 
     //  navigating player back who entered without id from route
@@ -40,12 +43,25 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     this.totalWords = socket.gameState.words;
+    this.gameCode = socket.gameState._id;
   }
 
   ngOnInit(): void {
     this.updateGameSubscription = this.socket.updateGame().subscribe((game) => {
       this.socket.gameState = game;
+      this.players = this.socket.gameState.players;
       this.player = this.findPlayer(this.socket.gameState.players);
+      if (this.socket.gameState.isOpen || this.socket.gameState.isOver) {
+        // this.userInputDisabled = true;
+        this.disableUserInput();
+      } else {
+        // this.userInputDisabled = false;
+        // console.log('called');
+        // this.userInputElement.nativeElement.focus();
+        this.enableUserInput();
+      }
+
+      this.players.sort((a, b) => (a.WPM > b.WPM ? -1 : b.WPM > a.WPM ? 1 : 0));
     });
 
     this.timerStartSubscription = this.socket
@@ -66,11 +82,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.showTimer = true;
       });
 
-    this.timerEndSubscription = this.socket.timerEnd().subscribe(() => {
-      this.socket.removeListener('timer');
-      this.disableUserInput();
-      console.log('called');
-    });
+    this.timerEndSubscription = this.socket.timerEnd().subscribe();
   }
 
   ngOnDestroy(): void {
@@ -91,7 +103,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   getTypedWords() {
     let typedWords = this.totalWords.slice(0, this.player.currWordIndex);
-    typedWords = typedWords.join('');
+    typedWords = typedWords.join(' ');
 
     return typedWords;
   }
@@ -121,15 +133,26 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   userInputChanged(event: string): void {
-    const prevPlayerWordInd = this.player.currWordIndex;
     const lastChar = event.charAt(event.length - 1);
+
     if (lastChar === ' ') {
       this.socket.userInputChanged(event, this.socket.gameState._id);
+
       this.userInputVal = '';
       event = '';
       this.userInputElement.nativeElement.value = '';
-
-      console.log(this.player.WPM);
     }
+  }
+
+  calculatePercentageDone(player) {
+    return (
+      ((player.currWordIndex / this.totalWords.length) * 100).toFixed(2) + ' %'
+    );
+  }
+
+  copyToClipBoard(gameIDInput): void {
+    gameIDInput.select();
+    document.execCommand('copy');
+    gameIDInput.setSelectionRange(0, 0);
   }
 }

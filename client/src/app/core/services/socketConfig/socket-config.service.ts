@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, EMPTY } from 'rxjs';
 import * as io from 'socket.io-client';
 
 @Injectable({
@@ -53,9 +53,11 @@ export class SocketConfigService {
   }
 
   timerEnd(): Observable<any> {
-    this.socket.on('done', () => {});
+    this.socket.on('done', () => {
+      this.socket.removeListener('timer');
+    });
 
-    return new Observable(() => {});
+    return EMPTY; //  returning empty observable
   }
 
   removeSocket(): void {

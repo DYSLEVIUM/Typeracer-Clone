@@ -31,7 +31,7 @@ const GameSchema = new mongoose.Schema({
       },
       WPM: {
         type: Number,
-        default: -1, //  -1 represents WPM hasn't been calculated
+        default: 0,
       },
       nickName: {
         type: String,

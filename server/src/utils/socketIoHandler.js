@@ -91,6 +91,7 @@ module.exports = (io) => (socket) => {
           if (player.currWordIndex !== game.words.length) {
             let endTime = new Date().getTime();
             let { startTime } = game;
+
             player.WPM = calculateWPM(endTime, startTime, player);
 
             game = await game.save();
@@ -98,6 +99,7 @@ module.exports = (io) => (socket) => {
           } else {
             let endTime = new Date().getTime();
             let { startTime } = game;
+
             player.WPM = calculateWPM(endTime, startTime, player);
 
             game = await game.save();
@@ -133,7 +135,7 @@ module.exports = (io) => (socket) => {
             game.isOver = true;
 
             game.players.forEach((player, index) => {
-              if (player.WPM === -1) {
+              if (player.WPM === 0) {
                 game.players[index].WPM = calculateWPM(
                   endTime,
                   startTime,
@@ -159,7 +161,7 @@ module.exports = (io) => (socket) => {
 
     const timeInMinutes = timeInSeconds / 60;
 
-    const WPM = Math.floor(numOfWords / timeInMinutes);
+    const WPM = numOfWords / timeInMinutes;
     return WPM;
   };
 

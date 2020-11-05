@@ -1,4 +1,23 @@
 <div>
+  <h2>Game Code</h2>
+  <input value="{{ gameCode }}" #copyEl readonly />
+  <button (click)="copyToClipBoard(copyEl)">Copy Code</button>
+  <div>
+    <h5>{{ this.player.nickName }}</h5>
+    <h4>{{ calculatePercentageDone(this.player) }}</h4>
+    <h4>{{ this.player.WPM.toFixed(2) }} WPM</h4>
+  </div>
+
+  <br /><br />
+  <!-- other players -->
+  <div *ngFor="let idk of players">
+    <div *ngIf="idk != this.player">
+      <h5>{{ idk.nickName }}</h5>
+      <h4>{{ calculatePercentageDone(idk) }}</h4>
+      <h4>{{ idk.WPM.toFixed(2) }} WPM</h4>
+    </div>
+  </div>
+
   <button *ngIf="player.isPartyLeader && startBtnShow" (click)="startGame()">
     Start
   </button>
@@ -7,25 +26,13 @@
   <div *ngIf="showTimer">{{ timer.msg }}</div>
 
   <!-- !change to external stylesheets later -->
-  <div
-    style="
-      background-color: rgb(72, 252, 72);
-      display: inline-block;
-      margin: 0 5px;
-    "
-  >
+  <div style="display: inline-flex; background-color: rgb(72, 252, 72)">
     {{ getTypedWords() }}
   </div>
-  <div
-    style="
-      background-color: rgb(253, 255, 109);
-      display: inline-block;
-      margin: 0 5px;
-    "
-  >
+  <div style="display: inline-flex; background-color: rgb(253, 255, 109)">
     {{ getCurrentWord() }}
   </div>
-  <div style="display: inline-block; margin: 0 5px">
+  <div style="display: inline-flex">
     {{ getWordsToBeTyped() }}
   </div>
   <input
@@ -38,5 +45,27 @@
     [disabled]="userInputDisabled"
     (ngModelChange)="userInputChanged($event)"
     autocomplete="off"
+    autofocus
   />
+
+  <!-- <div *ngFor="let word of totalWords">{{ word }}</div> -->
+
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>User</th>
+          <th>WPM</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let player of players; index as i">
+        <tr>
+          <th>{{ i + 1 }}</th>
+          <td>{{ player.nickName }}</td>
+          <td>{{ player.WPM }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
