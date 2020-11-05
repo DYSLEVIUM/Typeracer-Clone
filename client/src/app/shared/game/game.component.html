@@ -5,4 +5,38 @@
 
   <div *ngIf="showTimer">{{ timer.countDown }}</div>
   <div *ngIf="showTimer">{{ timer.msg }}</div>
+
+  <!-- !change to external stylesheets later -->
+  <div
+    style="
+      background-color: rgb(72, 252, 72);
+      display: inline-block;
+      margin: 0 5px;
+    "
+  >
+    {{ getTypedWords() }}
+  </div>
+  <div
+    style="
+      background-color: rgb(253, 255, 109);
+      display: inline-block;
+      margin: 0 5px;
+    "
+  >
+    {{ getCurrentWord() }}
+  </div>
+  <div style="display: inline-block; margin: 0 5px">
+    {{ getWordsToBeTyped() }}
+  </div>
+  <input
+    type="text"
+    name="userInput"
+    #userInput
+    [ngModel]="userInputVal"
+    required
+    placeholder="Type here ..."
+    [disabled]="userInputDisabled"
+    (ngModelChange)="userInputChanged($event)"
+    autocomplete="off"
+  />
 </div>

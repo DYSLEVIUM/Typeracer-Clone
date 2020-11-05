@@ -52,16 +52,6 @@ export class SocketConfigService {
     });
   }
 
-  // timerEnd(): Observable<any> {
-  //   this.socket.on('done', (timerData) => {
-  //     this.timerObs.next(timerData);
-  //   });
-
-  //   return new Observable((timerData) => {
-  //     this.timerObs = timerData;
-  //   });
-  // }
-
   timerEnd(): Observable<any> {
     this.socket.on('done', () => {});
 
@@ -82,5 +72,9 @@ export class SocketConfigService {
 
   startTimer(gameID, playerID): void {
     this.socket.emit('startTimer', { gameID, playerID });
+  }
+
+  userInputChanged(userInput, gameID): void {
+    this.socket.emit('userInput', { userInput, gameID });
   }
 }

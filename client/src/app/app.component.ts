@@ -8,5 +8,5 @@ import { SocketConfigService } from './core/services/socketConfig/socket-config.
 })
 export class AppComponent {
   title = 'typeracer-clone';
-  constructor(private socket: SocketConfigService) {}
+  constructor() {}
 }
