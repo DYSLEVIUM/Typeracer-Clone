@@ -144,7 +144,7 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  calculatePercentageDone(player) {
+  calculatePercentageDone(player): string {
     return (
       ((player.currWordIndex / this.totalWords.length) * 100).toFixed(2) + ' %'
     );
