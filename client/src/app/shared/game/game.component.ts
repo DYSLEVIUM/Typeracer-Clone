@@ -101,7 +101,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.socket.startTimer(this.socket.gameState._id, this.player._id);
   }
 
-  getTypedWords() {
+  getTypedWords(): string {
     let typedWords = this.totalWords.slice(0, this.player.currWordIndex);
     typedWords = typedWords.join(' ');
 
