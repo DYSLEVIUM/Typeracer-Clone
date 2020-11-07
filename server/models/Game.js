@@ -16,8 +16,6 @@ const GameSchema = new mongoose.Schema({
   },
   players: [
     {
-      // type: mongoose.Schema.Types.ObjectId,
-      // ref: 'Player',
       currWordIndex: {
         type: Number,
         default: 0,

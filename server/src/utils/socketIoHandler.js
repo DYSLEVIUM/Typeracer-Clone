@@ -145,6 +145,7 @@ module.exports = (io) => (socket) => {
             });
 
             game = await game.save();
+            socket.emit('done');
             io.to(game._id).emit('updateGame', game);
             clearInterval(timerID);
           })();
@@ -153,6 +154,9 @@ module.exports = (io) => (socket) => {
       })(),
       1000
     );
+
+    game = await game.save();
+    io.to(game._id).emit('updateGame', game);
   };
 
   const calculateWPM = (endTime, startTime, player) => {

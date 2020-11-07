@@ -51,6 +51,8 @@ export class GameComponent implements OnInit, OnDestroy {
       this.socket.gameState = game;
       this.players = this.socket.gameState.players;
       this.player = this.findPlayer(this.socket.gameState.players);
+      this.totalWords = this.socket.gameState.words;
+
       if (this.socket.gameState.isOpen || this.socket.gameState.isOver) {
         // this.userInputDisabled = true;
         this.disableUserInput();
@@ -67,7 +69,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.timerStartSubscription = this.socket
       .timerStart()
       .subscribe((timerData) => {
-        this.startBtnShow = false;
         this.socket.timerState = timerData;
         this.timer = this.socket.timerState;
 
@@ -82,7 +83,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.showTimer = true;
       });
 
-    this.timerEndSubscription = this.socket.timerEnd().subscribe();
+    this.timerEndSubscription = this.socket.timerEnd().subscribe(() => {});
   }
 
   ngOnDestroy(): void {
