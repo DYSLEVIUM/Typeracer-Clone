@@ -58,6 +58,11 @@ export class GameComponent implements OnInit, OnDestroy {
         this.enableUserInput();
       }
 
+      this.startBtnShow =
+        this.socket.gameState.isOpen &&
+        this.socket.gameState.isOver &&
+        this.player.isPartyLeader;
+
       this.players.sort((a, b) => (a.WPM > b.WPM ? -1 : b.WPM > a.WPM ? 1 : 0));
     });
 
@@ -66,15 +71,13 @@ export class GameComponent implements OnInit, OnDestroy {
       .subscribe((timerData) => {
         this.socket.timerState = timerData;
         this.timer = this.socket.timerState;
+        this.showTimer = this.socket.gameState.isOver;
 
-        this.showTimer = !this.socket.gameState.isOver;
-
-        this.startBtnShow =
-          this.socket.gameState.isOpen && this.socket.gameState.isOver;
+        this.showTimer = true;
 
         if (this.socket.timerState.msg === 'gameEnd') {
           this.showTimer = false;
-          this.startBtnShow = true;
+          this.userInputVal = '';
         }
       });
 

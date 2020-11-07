@@ -48,10 +48,23 @@ module.exports = (io) => (socket) => {
     }
   });
 
+  let firstGameDone = false;
   socket.on('startTimer', async ({ gameID, playerID }) => {
     try {
       let countDown = 3;
       let game = await Game.findById(gameID);
+
+      if (firstGameDone) {
+        game.words = await wordGen();
+        game.players.forEach((player, index) => {
+          game.players[index].currWordIndex = 0;
+        });
+        io.to(gameID).emit('updateGame', game);
+      }
+
+      game.isOver = false;
+      game = await game.save();
+
       let player = game.players.id(playerID);
 
       if (player.isPartyLeader) {
@@ -59,9 +72,9 @@ module.exports = (io) => (socket) => {
           if (countDown >= 0) {
             io.to(gameID).emit('timer', { countDown, msg: 'countdown' });
             --countDown;
-            countDownT = countDown;
           } else {
             game.isOpen = false;
+
             game = await game.save();
 
             io.to(gameID).emit('updateGame', game);
@@ -74,6 +87,7 @@ module.exports = (io) => (socket) => {
     } catch (err) {
       console.log(err);
     }
+    firstGameDone = true;
   });
 
   socket.on('userInput', async ({ userInput, gameID }) => {
@@ -122,6 +136,7 @@ module.exports = (io) => (socket) => {
     let timerID = setInterval(
       (function gameIntervalFunc() {
         const formatTime = calculateTime(time);
+
         if (time >= 0) {
           io.to(game._id).emit('timer', {
             countDown: formatTime,
@@ -130,7 +145,7 @@ module.exports = (io) => (socket) => {
           --time;
         } else {
           (async () => {
-            game = await Game.findById(game._id); //getting the updated game
+            game = await Game.findById(game._id);
 
             game.isOver = true;
             game.isOpen = true;
@@ -146,8 +161,6 @@ module.exports = (io) => (socket) => {
       })(),
       1000
     );
-
-    game = await game.save();
     io.to(game._id).emit('updateGame', game);
   };
 
