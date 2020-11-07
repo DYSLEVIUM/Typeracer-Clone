@@ -2,6 +2,7 @@
   <h2>Game Code</h2>
   <input value="{{ gameCode }}" #copyEl readonly />
   <button (click)="copyToClipBoard(copyEl)">Copy Code</button>
+
   <div>
     <h5>{{ this.player.nickName }}</h5>
     <h4>{{ calculatePercentageDone(this.player) }}</h4>
@@ -10,11 +11,11 @@
 
   <br /><br />
   <!-- other players -->
-  <div *ngFor="let idk of players">
-    <div *ngIf="idk != this.player">
-      <h5>{{ idk.nickName }}</h5>
-      <h4>{{ calculatePercentageDone(idk) }}</h4>
-      <h4>{{ idk.WPM.toFixed(2) }} WPM</h4>
+  <div *ngFor="let otherPlayers of players">
+    <div *ngIf="otherPlayers != this.player">
+      <h5>{{ otherPlayers.nickName }}</h5>
+      <h4>{{ calculatePercentageDone(otherPlayers) }}</h4>
+      <h4>{{ otherPlayers.WPM.toFixed(2) }} WPM</h4>
     </div>
   </div>
 

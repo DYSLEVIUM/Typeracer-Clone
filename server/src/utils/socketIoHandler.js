@@ -28,7 +28,7 @@ module.exports = (io) => (socket) => {
   socket.on('joinGame', async ({ gameID: _id, nickName }) => {
     try {
       let game = await Game.findById(_id);
-      if (game.isOpen) {
+      if (game.isOpen && game.isOver) {
         const gameID = game._id.toString();
 
         socket.join(gameID); //  joined using primary key
@@ -58,12 +58,13 @@ module.exports = (io) => (socket) => {
         game.words = await wordGen();
         game.players.forEach((player, index) => {
           game.players[index].currWordIndex = 0;
+          game.players[index].WPM = 0;
         });
-        io.to(gameID).emit('updateGame', game);
       }
 
       game.isOver = false;
       game = await game.save();
+      io.to(gameID).emit('updateGame', game);
 
       let player = game.players.id(playerID);
 
