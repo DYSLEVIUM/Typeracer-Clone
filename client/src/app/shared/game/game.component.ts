@@ -34,16 +34,15 @@ export class GameComponent implements OnInit, OnDestroy {
   userInputDisabled = true;
 
   constructor(private socket: SocketConfigService, private router: Router) {
-    this.players = socket.gameState.players;
-    this.player = this.findPlayer(socket.gameState.players);
+    try {
+      this.players = socket.gameState.players;
+      this.player = this.findPlayer(socket.gameState.players);
 
-    //  navigating player back who entered without id from route
-    if (socket.gameState._id === '' || typeof this.player === 'undefined') {
-      this.router.navigateByUrl('/');
+      this.totalWords = socket.gameState.words;
+      this.gameCode = socket.gameState._id;
+    } catch (error) {
+      router.navigate(['/']);
     }
-
-    this.totalWords = socket.gameState.words;
-    this.gameCode = socket.gameState._id;
   }
 
   ngOnInit(): void {
@@ -54,12 +53,8 @@ export class GameComponent implements OnInit, OnDestroy {
       this.totalWords = this.socket.gameState.words;
 
       if (this.socket.gameState.isOpen || this.socket.gameState.isOver) {
-        // this.userInputDisabled = true;
         this.disableUserInput();
       } else {
-        // this.userInputDisabled = false;
-        // console.log('called');
-        // this.userInputElement.nativeElement.focus();
         this.enableUserInput();
       }
 
@@ -72,24 +67,26 @@ export class GameComponent implements OnInit, OnDestroy {
         this.socket.timerState = timerData;
         this.timer = this.socket.timerState;
 
-        if (
-          (this.socket.timerState.msg === 'countdown' &&
-            this.socket.timerState.countDown === 0) ||
-          this.socket.timerState.msg === 'started'
-        ) {
-          this.enableUserInput();
-        }
+        this.showTimer = !this.socket.gameState.isOver;
 
-        this.showTimer = true;
+        this.startBtnShow =
+          this.socket.gameState.isOpen && this.socket.gameState.isOver;
+
+        if (this.socket.timerState.msg === 'gameEnd') {
+          this.showTimer = false;
+          this.startBtnShow = true;
+        }
       });
 
-    this.timerEndSubscription = this.socket.timerEnd().subscribe(() => {});
+    this.timerEndSubscription = this.socket.timerEnd().subscribe();
   }
 
   ngOnDestroy(): void {
-    this.updateGameSubscription.unsubscribe();
-    this.timerStartSubscription.unsubscribe();
-    this.timerEndSubscription.unsubscribe();
+    try {
+      this.updateGameSubscription.unsubscribe();
+      this.timerStartSubscription.unsubscribe();
+      this.timerEndSubscription.unsubscribe();
+    } catch (error) {}
   }
 
   findPlayer(players: Array<any>): any {

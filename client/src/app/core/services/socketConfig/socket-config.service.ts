@@ -51,13 +51,13 @@ export class SocketConfigService {
       this.timerObs = timerData;
     });
   }
-
   timerEnd(): Observable<any> {
-    this.socket.on('done', () => {
-      this.socket.removeListener('timer');
+    this.socket.on('done', (timerData) => {
+      this.timerObs.next(timerData);
+      // this.socket.removeListener('timer');
     });
 
-    return EMPTY; //  returning empty observable
+    return EMPTY;
   }
 
   removeSocket(): void {
