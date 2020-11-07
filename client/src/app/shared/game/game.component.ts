@@ -35,13 +35,13 @@ export class GameComponent implements OnInit, OnDestroy {
 
   constructor(private socket: SocketConfigService, private router: Router) {
     try {
-      this.players = socket.gameState.players;
-      this.player = this.findPlayer(socket.gameState.players);
+      this.players = this.socket.gameState.players;
+      this.player = this.findPlayer(this.socket.gameState.players);
 
-      this.totalWords = socket.gameState.words;
-      this.gameCode = socket.gameState._id;
+      this.totalWords = this.socket.gameState.words;
+      this.gameCode = this.socket.gameState._id;
     } catch (error) {
-      router.navigate(['/']);
+      this.router.navigate(['/']);
     }
   }
 

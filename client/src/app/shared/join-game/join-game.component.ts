@@ -18,8 +18,12 @@ export class JoinGameComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    this.updateGameSubscription.unsubscribe();
-    this.socket.removeListener('joinGame');
+    try {
+      this.updateGameSubscription.unsubscribe();
+      this.socket.removeListener('joinGame');
+    } catch (error) {
+      this.router.navigate(['/joinGame']);
+    }
   }
 
   onSubmit(joinGame: NgForm): void {

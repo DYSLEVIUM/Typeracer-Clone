@@ -48,7 +48,6 @@ module.exports = (io) => (socket) => {
     }
   });
 
-  let countDownT;
   socket.on('startTimer', async ({ gameID, playerID }) => {
     try {
       let countDown = 3;
@@ -119,7 +118,7 @@ module.exports = (io) => (socket) => {
     game.startTime = new Date().getTime();
     game = await game.save();
 
-    let time = game.words.length * (Math.random() + 0.75) * 5;
+    let time = game.words.length * (Math.random() + 0.75) * 2;
     let timerID = setInterval(
       (function gameIntervalFunc() {
         const formatTime = calculateTime(time);
@@ -131,21 +130,12 @@ module.exports = (io) => (socket) => {
           --time;
         } else {
           (async () => {
-            let endTime = new Date().getTime();
-            let { startTime } = game;
+            game = await Game.findById(game._id); //getting the updated game
+
             game.isOver = true;
             game.isOpen = true;
 
-            game.players.forEach((player, index) => {
-              game.players[index].WPM = calculateWPM(
-                endTime,
-                startTime,
-                player
-              );
-            });
-
             game = await game.save();
-            game.words = await wordGen();
 
             io.to(game._id).emit('done', { countDown: -1, msg: 'gameEnd' });
             io.to(game._id).emit('updateGame', game);
