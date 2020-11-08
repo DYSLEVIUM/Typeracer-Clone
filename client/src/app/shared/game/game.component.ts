@@ -29,7 +29,6 @@ export class GameComponent implements OnInit, OnDestroy {
   totalWords;
 
   @ViewChild('userInput') userInputElement: ElementRef;
-  userInputVal;
 
   userInputDisabled = true;
 
@@ -60,8 +59,6 @@ export class GameComponent implements OnInit, OnDestroy {
         this.enableUserInput();
       }
 
-      console.log(this.player);
-
       this.players.sort((a, b) => (a.WPM > b.WPM ? -1 : b.WPM > a.WPM ? 1 : 0));
     });
 
@@ -79,7 +76,7 @@ export class GameComponent implements OnInit, OnDestroy {
           this.showTimer = false;
           this.startBtnShow = this.player.isPartyLeader;
 
-          this.userInputVal = '';
+          this.userInputElement.nativeElement.value = '';
         }
       });
 
@@ -141,7 +138,6 @@ export class GameComponent implements OnInit, OnDestroy {
     if (lastChar === ' ') {
       this.socket.userInputChanged(event, this.socket.gameState._id);
 
-      this.userInputVal = '';
       event = '';
       this.userInputElement.nativeElement.value = '';
     }
