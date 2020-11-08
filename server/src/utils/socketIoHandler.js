@@ -102,27 +102,18 @@ module.exports = (io) => (socket) => {
         );
         let word = game.words[player.currWordIndex];
 
-        if (word === userInput) {
-          player.currWordIndex++;
-          if (player.currWordIndex !== game.words.length) {
-            let endTime = new Date().getTime();
-            let { startTime } = game;
+        if (word === userInput) player.currWordIndex++;
 
-            player.WPM = calculateWPM(endTime, startTime, player);
+        if (game.words.length === player.currWordIndex + 1)
+          socket.emit('done', { countDown: -1, msg: 'playerEnd' });
 
-            game = await game.save();
-            io.to(gameID).emit('updateGame', game);
-          } else {
-            let endTime = new Date().getTime();
-            let { startTime } = game;
+        let endTime = new Date().getTime();
+        let { startTime } = game;
 
-            player.WPM = calculateWPM(endTime, startTime, player);
+        player.WPM = calculateWPM(endTime, startTime, player);
 
-            game = await game.save();
-
-            io.to(gameID).emit('updateGame', game);
-          }
-        }
+        game = await game.save();
+        io.to(gameID).emit('updateGame', game);
       }
     } catch (err) {
       console.log(err);

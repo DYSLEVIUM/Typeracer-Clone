@@ -15,7 +15,7 @@
     <div *ngIf="otherPlayers != this.player">
       <h5>{{ otherPlayers.nickName }}</h5>
       <h4>{{ calculatePercentageDone(otherPlayers) }}</h4>
-      <h4>{{ otherPlayers.WPM.toFixed(2) }} WPM</h4>
+      <h4>{{ otherPlayers.WPM.toFixed(3) }} WPM</h4>
     </div>
   </div>
 
@@ -62,7 +62,7 @@
         <tr>
           <th>{{ i + 1 }}</th>
           <td>{{ player.nickName }}</td>
-          <td>{{ player.WPM }}</td>
+          <td>{{ player.WPM.toFixed(3) }}</td>
         </tr>
       </tbody>
     </table>

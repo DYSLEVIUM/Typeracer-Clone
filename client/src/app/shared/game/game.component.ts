@@ -23,6 +23,8 @@ export class GameComponent implements OnInit, OnDestroy {
   timerStartSubscription: Subscription;
   timerEndSubscription: Subscription;
 
+  updatingWPM;
+
   showTimer = false;
   timer;
 
@@ -78,6 +80,13 @@ export class GameComponent implements OnInit, OnDestroy {
 
           this.userInputElement.nativeElement.value = '';
         }
+
+        if (
+          this.socket.timerState.msg === 'gameEnd' ||
+          this.socket.timerState.msg === 'playerEnd'
+        ) {
+          clearInterval(this.updatingWPM);
+        }
       });
 
     this.timerEndSubscription = this.socket.timerEnd().subscribe();
@@ -99,6 +108,9 @@ export class GameComponent implements OnInit, OnDestroy {
 
   startGame(): void {
     this.socket.startTimer(this.socket.gameState._id, this.player._id);
+    this.updatingWPM = setInterval(() => {
+      this.socket.userInputChanged('', this.socket.gameState._id);
+    }, 300);
   }
 
   getTypedWords(): string {
@@ -145,7 +157,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   calculatePercentageDone(player): string {
     return (
-      ((player.currWordIndex / this.totalWords.length) * 100).toFixed(2) + ' %'
+      ((player.currWordIndex / this.totalWords.length) * 100).toFixed(3) + ' %'
     );
   }
 
