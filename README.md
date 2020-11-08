@@ -1,8 +1,12 @@
 # Typeracer - Clone
 
-#### Run instructions
+##  Preface
 
-This project is run with `docker` & `docker-compose`. Make sure you have both of them.
+This project is a **Full - Stack** app made with **MongoDB**, **Express**, **Angular** and **NodeJs**. This app was built to get familiar with the current trending technologies in **Full - Stack** web applications. Also, this project structure and design can be used as a template for modern web apps.
+
+## Run instructions
+
+The project is separated into client/server directories. This project is run with `docker` & `docker-compose`.Make sure to install **docker** and **docker-compose** to run this project hassle-free.
 
     1.  Open terminal and type the following commands :
 
