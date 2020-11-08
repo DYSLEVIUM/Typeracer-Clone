@@ -6,10 +6,9 @@
   <div>
     <h5>{{ this.player.nickName }}</h5>
     <h4>{{ calculatePercentageDone(this.player) }}</h4>
-    <h4>{{ this.player.WPM.toFixed(2) }} WPM</h4>
+    <h4>{{ this.player.WPM.toFixed(3) }} WPM</h4>
   </div>
 
-  <br /><br />
   <!-- other players -->
   <div *ngFor="let otherPlayers of players">
     <div *ngIf="otherPlayers != this.player">
