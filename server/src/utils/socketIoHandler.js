@@ -124,7 +124,7 @@ module.exports = (io) => (socket) => {
     game.startTime = new Date().getTime();
     game = await game.save();
 
-    let time = game.words.length * (Math.random() + 0.75) * 2;
+    let time = game.words.length * (Math.random() + 0.75) * 3;
     let timerID = setInterval(
       (function gameIntervalFunc() {
         const formatTime = calculateTime(time);
