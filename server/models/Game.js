@@ -12,7 +12,7 @@ const GameSchema = new mongoose.Schema({
   },
   isOver: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   players: [
     {
