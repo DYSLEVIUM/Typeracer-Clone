@@ -1,25 +1,28 @@
 <div class="main-container">
   <form #joinGame (ngSubmit)="onSubmit(joinGame)">
-    <label for="gameID">GameID</label>
-    <input
-      type="text"
-      name="gameID"
-      [(ngModel)]="gameID"
-      required
-      placeholder="Enter GameID"
-      autocomplete="off"
-      autofocus
-    />
-
-    <label for="nickName">Nickname</label>
-    <input
-      type="text"
-      name="nickName"
-      [(ngModel)]="nickName"
-      required
-      placeholder="Enter Nickname"
-      autocomplete="on"
-    />
+    <div class="form-group">
+      <label for="gameID">GameID</label>
+      <input
+        type="text"
+        name="gameID"
+        [(ngModel)]="gameID"
+        required
+        placeholder="Enter GameID"
+        autocomplete="off"
+        autofocus
+      />
+    </div>
+    <div class="form-group">
+      <label for="nickName">Nickname</label>
+      <input
+        type="text"
+        name="nickName"
+        [(ngModel)]="nickName"
+        required
+        placeholder="Enter Nickname"
+        autocomplete="on"
+      />
+    </div>
     <button type="submit" class="fancy-button pop-onhover bg-gradient">
       <span>Join</span>
     </button>

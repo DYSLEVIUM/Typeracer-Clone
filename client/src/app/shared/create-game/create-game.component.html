@@ -1,15 +1,17 @@
 <div class="main-container">
   <form #createGame (ngSubmit)="onSubmit(createGame)">
-    <label for="nickName">Nickname</label>
-    <input
-      type="text"
-      name="nickName"
-      [(ngModel)]="nickName"
-      [required]
-      placeholder="Enter Nickname"
-      autocomplete="on"
-      autofocus
-    />
+    <div class="form-group">
+      <label for="nickName">Nickname</label>
+      <input
+        type="text"
+        name="nickName"
+        [(ngModel)]="nickName"
+        [required]
+        placeholder="Enter Nickname"
+        autocomplete="on"
+        autofocus
+      />
+    </div>
     <button type="submit" class="fancy-button pop-onhover bg-gradient">
       <span>Submit</span>
     </button>

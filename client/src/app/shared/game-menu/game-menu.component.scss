@@ -3,7 +3,7 @@
   left: 0;
   display: flex;
 
-  height: 80vh;
+  height: 50vh;
 
   flex-direction: column;
   justify-content: center;
@@ -13,11 +13,10 @@
 
   .title {
     h1 {
+      margin: 0 0 5rem 0;
       color: rgba(255, 255, 255, 1);
       font-size: 3rem;
       text-align: center;
-      text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
-      filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.1));
     }
   }
 }
