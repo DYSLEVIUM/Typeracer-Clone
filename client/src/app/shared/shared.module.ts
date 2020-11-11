@@ -9,7 +9,12 @@ import { JoinGameComponent } from './join-game/join-game.component';
 import { GameComponent } from './game/game.component';
 
 @NgModule({
-  declarations: [GameMenuComponent, CreateGameComponent, JoinGameComponent, GameComponent],
+  declarations: [
+    GameMenuComponent,
+    CreateGameComponent,
+    JoinGameComponent,
+    GameComponent,
+  ],
   imports: [CommonModule, FormsModule, RouterModule],
   exports: [GameMenuComponent],
 })

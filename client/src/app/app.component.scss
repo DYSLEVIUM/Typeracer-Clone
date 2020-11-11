@@ -1,16 +1,16 @@
 .main-container {
   position: relative;
-  display: flex;
-  flex-direction: column;
 
   min-height: 100vh;
-
   app-header {
     position: static;
+    width: 100%;
     top: 0;
   }
+
   app-footer {
     position: absolute;
+    width: 100%;
     bottom: 0;
   }
 }

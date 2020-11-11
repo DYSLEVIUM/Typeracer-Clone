@@ -1,0 +1,12 @@
+.main-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding: 1rem 2rem;
+
+  background: inherit;
+
+  color: rgba(255, 255, 255, 1);
+}
