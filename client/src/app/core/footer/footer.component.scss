@@ -1,0 +1,64 @@
+.main-container {
+  background-color: rgba(0, 0, 0, 1);
+
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.65rem;
+
+  padding: 2rem;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .footer-heading {
+    text-align: center;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    margin: 1rem 0 0 0;
+    svg {
+      width: 1.35rem;
+      height: 1.35rem;
+      margin: 0 0.5rem;
+
+      &:hover {
+        path {
+          user-select: none;
+        }
+      }
+    }
+
+    .github-logo {
+      path {
+        fill: rgba(255, 255, 255, 0.75);
+      }
+
+      &:hover {
+        path {
+          fill: rgba(255, 255, 255, 1);
+        }
+      }
+    }
+
+    .mail-logo {
+      path {
+        fill: transparent;
+        stroke-width: 0.1rem;
+      }
+
+      &:hover {
+        path {
+          stroke: rgba(255, 255, 255, 1);
+        }
+        stroke: rgba(255, 255, 255, 1);
+      }
+    }
+  }
+}
