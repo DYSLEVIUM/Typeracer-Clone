@@ -56,19 +56,25 @@ module.exports = (io) => (socket) => {
   });
 
   socket.on('userLeft', async ({ gameID, playerID }) => {
-    let game = await Game.findById(gameID);
-    let player = game.players.id(playerID);
+    try {
+      let game = await Game.findById(gameID);
+      let player = game.players.id(playerID);
 
-    if (player.isPartyLeader) {
-      socket.disconnect();
+      console.log(game);
+      console.log(player);
+      if (player.isPartyLeader) {
+        socket.disconnect();
+      }
+
+      game.players = game.players.filter((player) => {
+        return playerID != player._id;
+      });
+
+      game = await game.save();
+      io.to(gameID).emit('updateGame', game);
+    } catch (error) {
+      console.log(error);
     }
-
-    game.players = game.players.filter((player) => {
-      return playerID != player._id;
-    });
-
-    game = await game.save();
-    io.to(gameID).emit('updateGame', game);
   });
 
   socket.on('disconnect', () => {
@@ -82,7 +88,7 @@ module.exports = (io) => (socket) => {
       let game = await Game.findById(gameID);
 
       if (firstGameDone) {
-        game.words = await wordGen();
+        game.words = await wordGen(); //  generating words for next game
         game.players.forEach((player, index) => {
           game.players[index].currWordIndex = 0;
           game.players[index].WPM = 0;
