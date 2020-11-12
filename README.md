@@ -7,7 +7,7 @@
 
 _Click on the **[gif](https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.mp4?raw=true)** to download a higher resolution video._
 
-__**Vist http://40.80.90.206/ for live demo.**__
+__**Vist http://typeracer-clone.centralindia.cloudapp.azure.com/ for live demo.**__
 
 ##  Preface
 
