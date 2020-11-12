@@ -60,12 +60,6 @@ module.exports = (io) => (socket) => {
       let game = await Game.findById(gameID);
       let player = game.players.id(playerID);
 
-      console.log(game);
-      console.log(player);
-      if (player.isPartyLeader) {
-        socket.disconnect();
-      }
-
       game.players = game.players.filter((player) => {
         return playerID != player._id;
       });

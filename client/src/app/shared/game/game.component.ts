@@ -72,7 +72,6 @@ export class GameComponent implements OnInit, OnDestroy {
       });
 
       if (!hasPartyLeader) {
-        this.ngOnDestroy();
         this.router.navigate(['/']);
       }
     });
