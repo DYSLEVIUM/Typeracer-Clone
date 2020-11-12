@@ -9,8 +9,7 @@ services:
       - '80:80'
     volumes:
       - /usr/app/node_modules
-      # ?not saving builds
-      # - ./client:/usr/app
+      - ./client:/usr/app
 
   # server side app
   server:
@@ -22,8 +21,7 @@ services:
       - 3000:3000
     volumes:
       - /usr/app/node_modules
-      # ?not saving builds
-      # - ./server:/usr/app
+      - ./server:/usr/app
     depends_on:
       - mongo
 
@@ -34,11 +32,11 @@ services:
     ports:
       - 27017:27017
 
-  # !gui for mongo temp
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    depends_on:
-      - mongo
+  # # !gui for mongo temp
+  # mongo-express:
+  #   image: mongo-express
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   depends_on:
+  #     - mongo
