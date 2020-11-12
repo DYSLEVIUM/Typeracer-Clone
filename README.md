@@ -2,8 +2,10 @@
 
 ##  Demo
 <p align="center">
-  <a href="https://github.com/Pushpakant/typeracer-clone/blob/master/demo.gif?raw=true"><img src="https://github.com/Pushpakant/typeracer-clone/blob/master/demo.gif?raw=true"></a>
+  <a href="https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.mp4?raw=true"><img src="https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.gif?raw=true"></a>
 </p>
+
+_Click on the **[gif](https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.mp4?raw=true)** to download a higher resolution video._
 
 __**Vist http://40.80.90.206/ for live demo.**__
 
