@@ -11,15 +11,16 @@ const routes: Routes = [
     component: GameMenuComponent,
   },
   {
-    path: 'gameMenu',
-    component: GameMenuComponent,
+    path: 'game/gameMenu',
+    redirectTo: '',
+    pathMatch: 'full',
   },
   {
-    path: 'createGame',
+    path: 'game/createGame',
     component: CreateGameComponent,
   },
   {
-    path: 'joinGame',
+    path: 'game/joinGame',
     component: JoinGameComponent,
   },
   {

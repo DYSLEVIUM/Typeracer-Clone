@@ -114,8 +114,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   getTypedWords(): string {
-    let typedWords = this.totalWords.slice(0, this.player.currWordIndex);
-    typedWords = typedWords.join(' ');
+    const typedWords = this.totalWords.slice(0, this.player.currWordIndex);
 
     return typedWords;
   }

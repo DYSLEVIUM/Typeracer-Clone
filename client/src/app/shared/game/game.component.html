@@ -1,37 +1,42 @@
-<div>
-  <h2>Game Code</h2>
-  <input value="{{ gameCode }}" #copyEl readonly />
-  <button (click)="copyToClipBoard(copyEl)">Copy Code</button>
+<div class="main-container">
+  <div class="progress">
+    <div class="currentPlayer">
+      <h5>{{ this.player.nickName | titlecase }}</h5>
+      <h4>{{ calculatePercentageDone(this.player) }}</h4>
+      <h4>{{ this.player.WPM.toFixed(3) }} WPM</h4>
+    </div>
 
-  <div>
-    <h5>{{ this.player.nickName }}</h5>
-    <h4>{{ calculatePercentageDone(this.player) }}</h4>
-    <h4>{{ this.player.WPM.toFixed(3) }} WPM</h4>
-  </div>
-
-  <!-- other players -->
-  <div *ngFor="let otherPlayers of players">
-    <div *ngIf="otherPlayers != this.player">
-      <h5>{{ otherPlayers.nickName }}</h5>
-      <h4>{{ calculatePercentageDone(otherPlayers) }}</h4>
-      <h4>{{ otherPlayers.WPM.toFixed(3) }} WPM</h4>
+    <!-- other players -->
+    <div *ngFor="let otherPlayers of players" class="otherPlayer">
+      <div *ngIf="otherPlayers != this.player">
+        <h5>{{ otherPlayers.nickName | titlecase }}</h5>
+        <h4>{{ calculatePercentageDone(otherPlayers) }}</h4>
+        <h4>{{ otherPlayers.WPM.toFixed(3) }} WPM</h4>
+      </div>
     </div>
   </div>
 
-  <button *ngIf="startBtnShow" (click)="startGame()">Start</button>
+  <button
+    class="fancy-button pop-onhover bg-gradient"
+    *ngIf="startBtnShow"
+    (click)="startGame()"
+  >
+    <span> Start </span>
+  </button>
 
   <div *ngIf="showTimer">{{ timer.countDown }}</div>
-  <div *ngIf="showTimer">{{ timer.msg }}</div>
 
   <!-- !change to external stylesheets later -->
-  <div style="display: inline-flex; background-color: rgb(72, 252, 72)">
-    {{ getTypedWords() }}
-  </div>
-  <div style="display: inline-flex; background-color: rgb(253, 255, 109)">
-    {{ getCurrentWord() }}
-  </div>
-  <div style="display: inline-flex">
-    {{ getWordsToBeTyped() }}
+  <div class="words">
+    <span class="typedWords" *ngFor="let typedWords of getTypedWords()">
+      {{ typedWords + "hehe" }}
+    </span>
+    <span class="currentWord">
+      {{ getCurrentWord() }}
+    </span>
+    <span class="wordsToBeTyped">
+      {{ getWordsToBeTyped() }}
+    </span>
   </div>
   <input
     type="text"
@@ -46,22 +51,32 @@
     autofocus
   />
 
+  <div class="gameCode">
+    <h4>Game Code</h4>
+    <input value="{{ gameCode }}" #copyEl readonly />
+    <button
+      class="fancy-button pop-onhover bg-gradient"
+      (click)="copyToClipBoard(copyEl)"
+    >
+      <span> Copy Code </span>
+    </button>
+  </div>
   <!-- <div *ngFor="let word of totalWords">{{ word }}</div> -->
 
-  <div>
+  <div class="dataTable">
     <table>
       <thead>
         <tr>
-          <th>#</th>
-          <th>User</th>
-          <th>WPM</th>
+          <th class="rank">Rank</th>
+          <th class="name">Name</th>
+          <th class="WPM">WPM</th>
         </tr>
       </thead>
       <tbody *ngFor="let player of players; index as i">
         <tr>
-          <th>{{ i + 1 }}</th>
-          <td>{{ player.nickName }}</td>
-          <td>{{ player.WPM.toFixed(3) }}</td>
+          <th class="rank">{{ i + 1 }}</th>
+          <td class="name">{{ player.nickName | titlecase }}</td>
+          <td class="WPM">{{ player.WPM.toFixed(4) }}</td>
         </tr>
       </tbody>
     </table>
