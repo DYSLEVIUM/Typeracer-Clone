@@ -54,7 +54,6 @@ export class SocketConfigService {
   timerEnd(): Observable<any> {
     this.socket.on('done', (timerData) => {
       this.timerObs.next(timerData);
-      // this.socket.removeListener('timer');
     });
 
     return EMPTY;
@@ -78,5 +77,9 @@ export class SocketConfigService {
 
   userInputChanged(userInput, gameID): void {
     this.socket.emit('userInput', { userInput, gameID });
+  }
+
+  userLeft(gameID, playerID): void {
+    this.socket.emit('userLeft', { gameID, playerID });
   }
 }

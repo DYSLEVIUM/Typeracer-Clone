@@ -62,6 +62,18 @@ export class GameComponent implements OnInit, OnDestroy {
       }
 
       this.players.sort((a, b) => (a.WPM > b.WPM ? -1 : b.WPM > a.WPM ? 1 : 0));
+
+      let hasPartyLeader = false;
+
+      this.socket.gameState.players.forEach((player) => {
+        if (player.isPartyLeader) {
+          hasPartyLeader = true;
+        }
+      });
+
+      if (!hasPartyLeader) {
+        this.router.navigate(['/']);
+      }
     });
 
     this.timerStartSubscription = this.socket
@@ -97,6 +109,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.updateGameSubscription.unsubscribe();
       this.timerStartSubscription.unsubscribe();
       this.timerEndSubscription.unsubscribe();
+      this.socket.userLeft(this.socket.gameState._id, this.player._id);
     } catch (error) {}
   }
 

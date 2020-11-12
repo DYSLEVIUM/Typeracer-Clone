@@ -1,5 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
-import { SocketConfigService } from './core/services/socketConfig/socket-config.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +7,5 @@ import { SocketConfigService } from './core/services/socketConfig/socket-config.
 })
 export class AppComponent {
   title = 'typeracer-clone';
-  constructor(private socket: SocketConfigService) {}
+  constructor() {}
 }

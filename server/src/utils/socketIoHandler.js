@@ -31,21 +31,48 @@ module.exports = (io) => (socket) => {
       if (game.isOpen && game.isOver) {
         const gameID = game._id.toString();
 
-        socket.join(gameID); //  joined using primary key
-
-        game.players.push({
-          socketID: socket.id,
-          isPartyLeader: false,
-          nickName,
+        let hasPartyLeader = false;
+        game.players.forEach((player) => {
+          if (player.isPartyLeader === true) hasPartyLeader = true;
         });
 
-        game = await game.save();
+        if (hasPartyLeader) {
+          socket.join(gameID); //  joined using primary key
 
-        io.to(gameID).emit('updateGame', game);
+          game.players.push({
+            socketID: socket.id,
+            isPartyLeader: false,
+            nickName,
+          });
+
+          game = await game.save();
+
+          io.to(gameID).emit('updateGame', game);
+        }
       }
     } catch (err) {
       console.log(err);
     }
+  });
+
+  socket.on('userLeft', async ({ gameID, playerID }) => {
+    let game = await Game.findById(gameID);
+    let player = game.players.id(playerID);
+
+    if (player.isPartyLeader) {
+      socket.disconnect();
+    }
+
+    game.players = game.players.filter((player) => {
+      return playerID != player._id;
+    });
+
+    game = await game.save();
+    io.to(gameID).emit('updateGame', game);
+  });
+
+  socket.on('disconnect', () => {
+    socket.disconnect();
   });
 
   let firstGameDone = false;
