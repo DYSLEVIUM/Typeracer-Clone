@@ -24,20 +24,25 @@
     <span> Start </span>
   </button>
 
-  <div *ngIf="showTimer">{{ timer.countDown }}</div>
+  <div *ngIf="showTimer" class="timer-container">
+    <span class="timer">{{ timer.countDown }}</span>
+  </div>
 
-  <!-- !change to external stylesheets later -->
   <div class="words">
     <span class="typedWords" *ngFor="let typedWords of getTypedWords()">
-      {{ typedWords + "hehe" }}
+      {{ typedWords }}
     </span>
     <span class="currentWord">
       {{ getCurrentWord() }}
     </span>
-    <span class="wordsToBeTyped">
-      {{ getWordsToBeTyped() }}
+    <span
+      class="wordsToBeTyped"
+      *ngFor="let wordsToBeTyped of getWordsToBeTyped()"
+    >
+      {{ wordsToBeTyped }}
     </span>
   </div>
+
   <input
     type="text"
     name="userInput"

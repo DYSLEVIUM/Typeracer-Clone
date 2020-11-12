@@ -113,6 +113,7 @@ module.exports = (io) => (socket) => {
         player.WPM = calculateWPM(endTime, startTime, player);
 
         game = await game.save();
+
         io.to(gameID).emit('updateGame', game);
       }
     } catch (err) {
@@ -124,7 +125,8 @@ module.exports = (io) => (socket) => {
     game.startTime = new Date().getTime();
     game = await game.save();
 
-    let time = game.words.length * (Math.random() + 0.75) * 3;
+    let time = game.words.length * (Math.random() + 1) * 3;
+
     let timerID = setInterval(
       (function gameIntervalFunc() {
         const formatTime = calculateTime(time);
@@ -134,6 +136,7 @@ module.exports = (io) => (socket) => {
             countDown: formatTime,
             msg: 'started',
           });
+
           --time;
         } else {
           (async () => {
@@ -170,5 +173,14 @@ module.exports = (io) => (socket) => {
     let minutes = Math.floor(time / 60);
     let seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+  };
+
+  const allPlayerFinised = (game) => {
+    let i = 0;
+    game.players.forEach((player) => {
+      if (game.words.length === player.currWordIndex) ++i;
+    });
+
+    return i === game.players.length;
   };
 };

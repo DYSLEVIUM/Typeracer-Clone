@@ -37,22 +37,36 @@
     flex-direction: row;
     .typedWords {
       display: inline-block;
-      text-decoration: underline;
-      text-decoration-color: green;
+      text-decoration-color: rgb(7, 231, 7);
+      background-color: rgb(7, 231, 7);
+      color: #000;
+      padding: 0 0.3rem;
     }
     .currentWord {
+      padding: 0 0.3rem;
       display: inline-block;
-      text-decoration: underline;
-      text-decoration-color: yellow;
+      background-color: rgb(255, 255, 14);
+      color: #000;
+    }
+
+    .wordsToBeTyped {
+      padding: 0 0.29rem 0 0;
     }
   }
 
   input {
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     border: 1px solid;
-    border-radius: 1rem;
     width: 100%;
     margin: 2rem 0;
+    font-size: 2rem;
+  }
+
+  .timer-container {
+    margin: 2rem 0;
+    .timer {
+      font-size: 2rem;
+    }
   }
 
   .gameCode {
@@ -63,7 +77,10 @@
     width: 100%;
 
     input {
+      padding: 1rem;
+      border-radius: 50rem;
       width: 40%;
+      font-size: 1rem;
     }
   }
 
