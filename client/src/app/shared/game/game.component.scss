@@ -6,7 +6,7 @@
 
   min-height: 78.5vh;
 
-  padding: 0 2rem;
+  padding: 0 1rem;
 
   color: rgba(255, 255, 255, 1);
 
@@ -17,6 +17,7 @@
 
     h5 {
       font-size: 2rem;
+      word-wrap: break-word;
     }
 
     h4 {
@@ -72,15 +73,16 @@
   .gameCode {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     width: 100%;
 
     input {
       padding: 1rem;
       border-radius: 50rem;
-      width: 40%;
       font-size: 1rem;
+      text-align: center;
     }
   }
 
@@ -100,6 +102,7 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
+        flex-wrap: wrap;
         align-items: center;
         width: 100%;
         tr {
@@ -107,6 +110,7 @@
           display: flex;
           flex-direction: row;
           align-items: center;
+          flex-wrap: wrap;
 
           th,
           td {
@@ -114,6 +118,8 @@
             justify-content: center;
             align-items: center;
             width: 33.333%;
+            flex-wrap: wrap;
+            word-wrap: break-word;
           }
         }
       }
