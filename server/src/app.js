@@ -1,7 +1,7 @@
 const express = require('express');
 const socketio = require('socket.io');
 const mongoose = require('mongoose');
-const helmet = require('helmet'); //  helps secure express app by adding various HTTp headers
+const helmet = require('helmet'); //  helps secure express app by adding various HTTP headers
 const middlewares = require('./middlewares');
 
 const socketIoHandler = require('./utils/socketIoHandler'); //  socketHandler
