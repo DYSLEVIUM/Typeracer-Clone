@@ -5,13 +5,14 @@
 This project is a **Full - Stack** app made with **MongoDB**, **Express**, **Angular**, **NodeJs** and uses **Docker** to run the application. This app was built to get familiar with the current trending technologies in **Full - Stack** web applications. Also, this project structure and design can be used as a template for modern web apps.
 
 ##  Demo
+
+__**Vist http://typeracer-clone.centralindia.cloudapp.azure.com/ for live demo.**__
+
 <p align="center">
   <a href="https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.mp4?raw=true"><img src="https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.gif?raw=true"></a>
 </p>
 
 _Click on the **[gif](https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.mp4?raw=true)** to download a higher resolution video._
-
-__**Vist http://typeracer-clone.centralindia.cloudapp.azure.com/ for live demo.**__
 
 ![preview](https://github.com/Pushpakant/typeracer-clone/blob/master/demo/img.png?raw=true)
 ## Run instructions
