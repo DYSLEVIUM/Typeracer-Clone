@@ -9,7 +9,7 @@ This project is a **Full - Stack** app made with **MongoDB**, **Express**, **Ang
 __**Vist http://typeracer-clone.centralindia.cloudapp.azure.com/ for live demo.**__
 
 <p align="center">
-  <a href="https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.mp4?raw=true"><img src="https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.gif?raw=true"></a>
+  <a href="https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.mp4?raw=true"><img src="https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.gif?raw=true" width="100%"></a>
 </p>
 
 _Click on the **[gif](https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.mp4?raw=true)** to download a higher resolution video._
