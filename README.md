@@ -2,7 +2,7 @@
 
 ##  Preface
 
-This project is a **Full - Stack** app made with **MongoDB**, **Express**, **Angular** and **NodeJs**. This app was built to get familiar with the current trending technologies in **Full - Stack** web applications. Also, this project structure and design can be used as a template for modern web apps.
+This project is a **Full - Stack** app made with **MongoDB**, **Express**, **Angular**, **NodeJs** and uses **Docker** to run the application. This app was built to get familiar with the current trending technologies in **Full - Stack** web applications. Also, this project structure and design can be used as a template for modern web apps.
 
 ##  Demo
 <p align="center">
