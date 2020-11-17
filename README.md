@@ -23,7 +23,7 @@ The project is separated into client/server directories. This project is run wit
 
         $   git clone https://github.com/Pushpakant/typeracer-clone.git
         $   cd typeracer-clone
-        $   docker-compose build --no-cache
+        $   docker-compose build
         $   docker-compose up -d
         $   start chrome http://localhost
         
