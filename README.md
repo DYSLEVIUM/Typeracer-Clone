@@ -12,7 +12,10 @@ This project is a **Full - Stack** app made with **MongoDB**, **Express**, **Ang
 
 _Click on the **[gif](https://github.com/Pushpakant/typeracer-clone/blob/master/demo/demo.mp4?raw=true)** to download a higher resolution video._
 
+## Screenshot
+
 ![preview](https://github.com/Pushpakant/typeracer-clone/blob/master/demo/img.png?raw=true)
+
 ## Run instructions
 
 The project is separated into client/server directories. This project is run with `docker` & `docker-compose`. Make sure to install **docker** and **docker-compose** to run this project hassle-free.
