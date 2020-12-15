@@ -1,5 +1,7 @@
 # Typeracer - Clone
 
+This is the original repository which was used to deploy the application to a virtual machine using azure.
+
 ##  Preface
 
 This repository contains both the server and the client side files for the application. This application has also been split into its server-side repository and the client side repository, so as to promote separation of concerns.
