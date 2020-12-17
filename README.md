@@ -6,7 +6,7 @@ This is the original repository which was used to deploy the application to a vi
 
 This repository contains both the server and the client side files for the application. This application has also been split into its server-side repository and the client side repository, so as to promote separation of concerns.
 
-This site is live at https://affectionate-swanson-1841b5.netlify.app
+This site is live at https://affectionate-swanson-1841b5.netlify.app.
 
 This project is a **Full - Stack** app made with **MongoDB**, **Express**, **Angular**, **NodeJs** and uses **Docker** to run the application. This app was built to get familiar with the current trending technologies in **Full - Stack** web applications. Also, this project structure and design can be used as a template for modern web apps.
 
