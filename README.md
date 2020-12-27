@@ -1,6 +1,8 @@
 # Typeracer - Clone [![Netlify Status](https://api.netlify.com/api/v1/badges/5d0611fb-5bff-4839-b488-3f027a7a9a8d/deploy-status)](https://app.netlify.com/sites/affectionate-swanson-1841b5/deploys)
 
-This is the original repository which was used to deploy the application to a virtual machine using azure. This repository alos contains all the demo files used in the readme file, making the repository of around 90MB.
+This is the original repository which was used to **deploy** the application **to a virtual machine using azure**. 
+
+This repository alos **contains all the demo files** used in the readme file, making the **size of the repository** around **90MB**.
 
 ##  Preface
 
