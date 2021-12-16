@@ -4,9 +4,9 @@ RUN apk update && apk add --no-cache make git
 
 WORKDIR '/usr/app'
 COPY ./package.json ./
-RUN npm install
+RUN yarn install
 COPY . .
-RUN npm run build --prod
+RUN yarn build --prod
 
 FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
